@@ -1,4 +1,4 @@
-# Changelog for EverFurnace: Farmer's Delight (Forge 1.20.1)
+# Changelog for EverFurnace: Farmer's Delight (NeoForge 1.21.1)
 
 All notable changes to EverFurnace: Farmer's Delight will be documented here.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).

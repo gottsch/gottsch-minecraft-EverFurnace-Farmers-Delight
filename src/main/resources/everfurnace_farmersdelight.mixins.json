@@ -1,7 +1,7 @@
 {
   "required": true,
-  "package": "mod.gottsch.forge.everfurnace.farmersdelight.core.mixin",
-  "compatibilityLevel": "JAVA_17",
+  "package": "mod.gottsch.neoforge.everfurnace.farmersdelight.core.mixin",
+  "compatibilityLevel": "JAVA_21",
   "refmap": "everfurnace_farmersdelight.refmap.json",
   "mixins": [
     "ICookingPotMixin",
