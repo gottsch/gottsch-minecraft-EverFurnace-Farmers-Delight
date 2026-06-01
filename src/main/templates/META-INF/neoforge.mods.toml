@@ -2,13 +2,14 @@ modLoader="javafml"
 loaderVersion="${loader_version_range}"
 license="${mod_license}"
 
-issueTrackerURL="https://github.com/gottsch/gottsch-minecraft-EverFurnace-FarmersDelight/issues"
+issueTrackerURL="https://github.com/gottsch/gottsch-minecraft-EverFurnace-Farmers-Delight/issues"
 
 [[mods]]
 modId="${mod_id}"
 version="${mod_version}"
 displayName="${mod_name}"
-displayURL="https://www.curseforge.com/minecraft/mc-mods/everfurnace-farmersdelight"
+updateJSONURL="https://raw.githubusercontent.com/gottsch/gottsch-minecraft-EverFurnace-Farmers-Delight/neoforge-1.21.1-main/update.json"
+displayURL="https://www.curseforge.com/minecraft/mc-mods/everfurnace-farmers-delight"
 authors="${mod_authors}"
 description='''${mod_description}'''
 
