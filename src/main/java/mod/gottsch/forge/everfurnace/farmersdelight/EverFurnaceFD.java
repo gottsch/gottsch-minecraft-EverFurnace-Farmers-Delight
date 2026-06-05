@@ -32,6 +32,9 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import vectorwing.farmersdelight.common.block.entity.AbstractStoveBlockEntity;
+import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
+import vectorwing.farmersdelight.common.block.entity.SkilletBlockEntity;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 
 /**
@@ -74,17 +77,22 @@ public class EverFurnaceFD {
         event.enqueueWork(() -> {
             ModNetwork.register();
 
-            EverFurnaceApi.registerHandler(
-                    ModBlockEntityTypes.COOKING_POT.get(),
-                    new CookingPotCatchupHandler());
+            CookingPotCatchupHandler cookingPotHandler = new CookingPotCatchupHandler();
+            StoveCatchupHandler      stoveHandler      = new StoveCatchupHandler();
+            SkilletCatchupHandler    skilletHandler    = new SkilletCatchupHandler();
 
-            EverFurnaceApi.registerHandler(
-                    ModBlockEntityTypes.STOVE.get(),
-                    new StoveCatchupHandler());
+            EverFurnaceApi.registerHandler(ModBlockEntityTypes.COOKING_POT.get(), cookingPotHandler);
+            EverFurnaceApi.registerHandler(ModBlockEntityTypes.STOVE.get(),       stoveHandler);
+            EverFurnaceApi.registerHandler(ModBlockEntityTypes.SKILLET.get(),     skilletHandler);
 
-            EverFurnaceApi.registerHandler(
-                    ModBlockEntityTypes.SKILLET.get(),
-                    new SkilletCatchupHandler());
+            // Capability defaults: catch up any mod that subclasses an FD cooking
+            // block (reusing its ticker) but registers its own BlockEntityType.
+            // The exact-type registrations above remain the override path; these
+            // only fill the gap they leave.  Each predicate matches the class its
+            // mixin is woven into, so the handler's accessor cast is always safe.
+            EverFurnaceApi.registerFallback(be -> be instanceof CookingPotBlockEntity,   cookingPotHandler);
+            EverFurnaceApi.registerFallback(be -> be instanceof AbstractStoveBlockEntity, stoveHandler);
+            EverFurnaceApi.registerFallback(be -> be instanceof SkilletBlockEntity,      skilletHandler);
 
             LOGGER.debug("EverFurnace: Farmer's Delight initialised — cooking pot, stove, and skillet catch-up registered.");
         });
